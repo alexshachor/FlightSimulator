@@ -4,9 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator"
+        xmlns:localView="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Flight Simulator" Height="450" Width="800" MinHeight="450" MinWidth="700" >
     <Grid>
-        
+
+        <Grid.Resources>
+
+            <Style TargetType="Button">
+                <Setter Property="Button.Background" Value="DarkBlue" />
+                <Setter Property="Button.FontSize" Value="20" />
+                <Setter Property="Button.FontFamily" Value="Showcard Gothic" />
+                <Setter Property="Button.Foreground" Value="White" />
+                <Setter Property="Button.Margin" Value="4" />
+                <Setter Property="Button.Padding" Value="4" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="400" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
+            <TextBlock Grid.Column="1" Text="Flight Simulator" FontSize="25" HorizontalAlignment="Center" Foreground="Purple" />
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="0" >
+            <localView:FlightRoutePanel />
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="1" >
+            <localView:ControlPanel />
+        </Viewbox>
     </Grid>
 </Window>
