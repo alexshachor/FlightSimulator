@@ -53,7 +53,7 @@ namespace FlightSimulator.ViewModels
 
         private void OkClick()
         {
-            if (!SettingsAndConnectVM.Is_connect)
+            if (!ControlBtnsVM.Is_connect)
             {
                 return;
             }
@@ -63,7 +63,7 @@ namespace FlightSimulator.ViewModels
                 string command;
                 while ((command = reader.ReadLine()) != null)
                 {
-                    TCPClient client = TCPClient.Instance;
+                    Client client = Client.Instance;
                     command = command + "\r\n"; // check if work
                     client.Write(command);
                 }

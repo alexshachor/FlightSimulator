@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightSimulator.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace FlightSimulator.ViewModels
                 {
                     return;
                 }
-                TCPClient client = TCPClient.Instance;
+                Client client = Client.Instance;
                 string command = "set controls/flight/rudder " + rudder + "\r\n";
                 client.Write(command);
             }
@@ -36,7 +37,7 @@ namespace FlightSimulator.ViewModels
                 {
                     return;
                 }
-                TCPClient client = TCPClient.Instance;
+                Client client = Client.Instance;
                 string command = "set controls/engines/current-engine/throttle " + rudder + "\r\n";
                 client.Write(command);
             }
@@ -58,7 +59,7 @@ namespace FlightSimulator.ViewModels
                 {
                     return;
                 }
-                TCPClient client = TCPClient.Instance;
+                Client client = Client.Instance;
                 string command = "set controls/flight/aileron " + rudder + "\r\n";
                 client.Write(command);
             }
@@ -79,7 +80,7 @@ namespace FlightSimulator.ViewModels
                 {
                     return;
                 }
-                TCPClient client = TCPClient.Instance;
+                Client client = Client.Instance;
                 string command = "set controls/flight/elevator " + rudder + "\r\n";
                 client.Write(command);
             }
