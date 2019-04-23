@@ -5,8 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+            d:DesignHeight="450" d:DesignWidth="400">
     <Grid>
-            
+
+        <Viewbox >
+            <TabControl>
+                <TabItem Header="Manual" FontSize ="15" Padding="5">
+                    <local:ManualMode></local:ManualMode>
+                </TabItem>
+                <TabItem Header="Auto Pilot" FontSize ="15"  Padding="5">
+                    <local:AutoPilotMode></local:AutoPilotMode>
+                </TabItem>
+            </TabControl>
+        </Viewbox>
     </Grid>
 </UserControl>

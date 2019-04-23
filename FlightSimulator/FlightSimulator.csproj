@@ -70,6 +70,9 @@
     <Compile Include="ViewModels\BaseNotify.cs" />
     <Compile Include="ViewModels\FlightBoardViewModel.cs" />
     <Compile Include="ViewModels\Windows\SettingsWindowViewModel.cs" />
+    <Compile Include="Views\AutoPilotMode.xaml.cs">
+      <DependentUpon>AutoPilotMode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ControlPanel.xaml.cs">
       <DependentUpon>ControlPanel.xaml</DependentUpon>
     </Compile>
@@ -86,7 +89,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\ManualMode.xaml.cs">
+      <DependentUpon>ManualMode.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AutoPilotMode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -103,6 +113,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Joystick.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManualMode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
