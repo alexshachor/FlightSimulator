@@ -5,47 +5,45 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400">
-    <Grid>
+             d:DesignHeight="450" Width="430.469">
+    <Grid Margin="0,0,-33,0" HorizontalAlignment="Left" Width="433">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*" />
-            <RowDefinition Height="350*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="65*" />
-            <ColumnDefinition Width="120*" />
-            <ColumnDefinition Width="157*" />
-            <ColumnDefinition Width="125*" />
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="175*" />
+            
+            <ColumnDefinition Width="175*" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Grid.Resources>
+        <!--<Grid.Resources>
 
             <Style TargetType="TextBlock">
-                <Setter Property="Button.FontSize" Value="10" />
+                <Setter Property="Button.FontSize" Value="8" />
             </Style>
 
-        </Grid.Resources>
-
+        </Grid.Resources>-->
         
-
-        <local:FlightBoard Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="4" HorizontalAlignment="Center" />
-
-
-        <Viewbox Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left">
-            <Button Name="ButSettings" Content="Settings" Command="{Binding SettingsCommand}" >
-            </Button>
-
-        </Viewbox>
         <!--<Viewbox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center">
             <Button x:Name="ButDisconnect" Content="Disconnect" Command="{Binding DisConnectCommand}">
             </Button>
         </Viewbox>-->
-        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
-            <Button x:Name="ButConnect"  Content="Connect" Command="{Binding ConnectCommand}">
+        
+        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"   >
+            <Button x:Name="ButConnect" Content="Connect" Command="{Binding ConnectCommand}">
             </Button>
         </Viewbox>
+        <Viewbox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"  >
+            <Button Name="ButSettings" Content="Settings" Command="{Binding SettingsCommand}">
+            </Button>
+
+        </Viewbox>
+
+        <local:FlightBoard Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Loaded="FlightBoard_Loaded" Margin="0,0,9,0" Width="423" />
 
     </Grid>
 </UserControl>

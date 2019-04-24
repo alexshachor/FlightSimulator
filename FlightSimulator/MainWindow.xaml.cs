@@ -23,5 +23,15 @@ namespace FlightSimulator
         {
             InitializeComponent();
         }
+
+        private void FlightRoutePanel_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ControlPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

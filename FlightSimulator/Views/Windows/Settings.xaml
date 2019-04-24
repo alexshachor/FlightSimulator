@@ -16,12 +16,14 @@
                 <Setter Property="FontFamily" Value="Segoe WP Black"/>
             </Style>
             <Style TargetType="Button">
-                <Setter Property="Button.Background" Value="DarkBlue" />
-                <Setter Property="Button.FontSize" Value="8" />
-                <Setter Property="Button.FontFamily" Value="Showcard Gothic" />
+                <Setter Property="Button.Background" Value="#480093" />
+                <Setter Property="Button.FontSize" Value="18" />
+                <Setter Property="Button.FontFamily" Value="Arial bold" />
                 <Setter Property="Button.Foreground" Value="White" />
-                <Setter Property="Button.Margin" Value="4" />
-                <Setter Property="Button.Padding" Value="4" />
+                <Setter Property="Button.Margin" Value="10" />
+                <Setter Property="Button.Padding" Value="10" />
+                <Setter Property="Button.Width" Value="200" />
+                <Setter Property="Button.BorderThickness" Value="1" />
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -38,13 +40,13 @@
         </Grid.ColumnDefinitions>
 
         <Viewbox Grid.Row="1" Grid.Column="0" >
-            <TextBlock Padding="3"  Margin="3" >Flight Server IP:</TextBlock>
+            <TextBlock Padding="3" Margin="3" >Flight Server IP:</TextBlock>
         </Viewbox>
         <Viewbox Grid.Row="2" Grid.Column="0"  >
-            <TextBlock Padding="3"  Margin="3">Flight Info Port:</TextBlock>
+            <TextBlock Padding="3" Margin="3">Flight Info Port:</TextBlock>
         </Viewbox>
         <Viewbox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
-            <TextBlock  Padding="3" Margin="3">Flight Command Port:</TextBlock>
+            <TextBlock Padding="3" Margin="3">Flight Command Port:</TextBlock>
         </Viewbox>
 
         <Viewbox  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="3" >
@@ -60,11 +62,11 @@
                   Text="{Binding  FlightInfoPort}" MinWidth="100"></TextBox>
         </Viewbox>
 
-        <Viewbox Grid.Row="4" HorizontalAlignment="Right" Grid.Column="0">
-            <Button x:Name="btnOK" Content="OK"  Margin="5" Padding="3" Command="{Binding ClickCommand}"/>
+        <Viewbox Grid.Row="4" HorizontalAlignment="Center"  Grid.Column="0" >
+            <Button x:Name="btnOK" Content="OK" Command="{Binding ClickCommand}"/>
         </Viewbox>
-        <Viewbox Grid.Row="4" HorizontalAlignment="Left"  Grid.Column="1" Grid.ColumnSpan="2">
-            <Button x:Name="btnCancel"   Margin="5" Padding="3" Content="Cancel" Command="{Binding CancelCommand}"/>
+        <Viewbox Grid.Row="4" HorizontalAlignment="Center"  Grid.Column="2" >
+            <Button x:Name="btnCancel" Content="Cancel" Command="{Binding CancelCommand}"/>
         </Viewbox>
 
 

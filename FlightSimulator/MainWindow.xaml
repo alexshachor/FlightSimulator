@@ -6,23 +6,25 @@
         xmlns:local="clr-namespace:FlightSimulator"
         xmlns:localView="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
-        Title="Flight Simulator" Height="450" Width="800" MinHeight="450" MinWidth="700" >
+        Title="Flight Simulator" Height="500" Width="800" MinHeight="300" MinWidth="480" >
     <Grid>
 
         <Grid.Resources>
 
             <Style TargetType="Button">
-                <Setter Property="Button.Background" Value="DarkBlue" />
-                <Setter Property="Button.FontSize" Value="20" />
-                <Setter Property="Button.FontFamily" Value="Showcard Gothic" />
+                <Setter Property="Button.Background" Value="#480093" />
+                <Setter Property="Button.FontSize" Value="18" />
+                <Setter Property="Button.FontFamily" Value="Arial bold" />
                 <Setter Property="Button.Foreground" Value="White" />
-                <Setter Property="Button.Margin" Value="4" />
-                <Setter Property="Button.Padding" Value="4" />
+                <Setter Property="Button.Margin" Value="10" />
+                <Setter Property="Button.Padding" Value="10" />
+                <Setter Property="Button.Width" Value="200" />
+                <Setter Property="Button.BorderThickness" Value="1" />
             </Style>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*" />
+            <RowDefinition Height="80*" />
             <RowDefinition Height="400*" />
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
@@ -32,13 +34,13 @@
         </Grid.ColumnDefinitions>
 
         <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" >
-            <TextBlock Grid.Column="1" Text="Flight Simulator" FontSize="25" HorizontalAlignment="Center" Foreground="Purple" />
+            <TextBlock Grid.Column="1" Text="Flight Simulator" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Padding="8"/>
         </Viewbox>
         <Viewbox Grid.Row="1" Grid.Column="0" >
-            <localView:FlightRoutePanel />
+            <localView:FlightRoutePanel Height="443" Width="440" />
         </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="1" >
-            <localView:ControlPanel />
+        <Viewbox Grid.Row="1" Grid.Column="1" Margin="22,10,10,0" >
+            <localView:ControlPanel Loaded="ControlPanel_Loaded" Height="523" Width="512" />
         </Viewbox>
     </Grid>
 </Window>
