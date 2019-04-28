@@ -12,60 +12,51 @@ namespace FlightSimulator.ViewModels
     class ControlBtnsVM
     {
         private ICommand settingsCommand;
-        public ICommand SettingsCommand
-        {
-            get
-            {
-                return settingsCommand ?? (settingsCommand = new CommandHandler(() => SettingsClick()));
-            }
-        }
+        private static bool isConnected = false;
+        private ICommand connectCommand;
 
-        private void SettingsClick()
+
+        private void OnSettingsClicked()
         {
             Settings s = new Settings();
             s.ShowDialog();
         }
 
-        private ICommand connectCommand;
-        public ICommand ConnectCommand
-        {
-            get
-            {
-                return connectCommand ?? (connectCommand = new CommandHandler(() => ConnectClick()));
-            }
-        }
 
-        static private bool is_connect = false;
-        static public bool Is_connect
+        private void OnConnectClicked()
         {
-            get { return is_connect; }
-            set
-            {
-                is_connect = value;
-            }
-        }
-
-        private void ConnectClick()
-        {
-            is_connect = true;
+            isConnected = true;
             Server server = new Server();
             Client client = new Client();
         }
 
 
-        private ICommand disConnectCommand;
-        public ICommand DisConnectCommand
+
+        public ICommand SettingsCommand
         {
             get
             {
-                return disConnectCommand ?? (disConnectCommand = new CommandHandler(() => DisConnectClick()));
+                return settingsCommand ?? (settingsCommand = new CommandHandler(() => OnSettingsClicked()));
             }
         }
 
-        private void DisConnectClick()
+
+        public ICommand ConnectCommand
         {
-            // TO-DO!!!
-            // call model to dis - connect
+            get
+            {
+                return connectCommand ?? (connectCommand = new CommandHandler(() => OnConnectClicked()));
+            }
+        }
+
+
+        static public bool IsConnected
+        {
+            get { return isConnected; }
+            set
+            {
+                isConnected = value;
+            }
         }
 
     }

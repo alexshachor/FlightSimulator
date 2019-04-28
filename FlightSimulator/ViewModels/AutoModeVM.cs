@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
-    class AutoModeVM :BaseNotify
+    class AutoModeVM : BaseNotify
     {
         private bool sending = true;
         public bool Sending
@@ -53,21 +53,21 @@ namespace FlightSimulator.ViewModels
 
         private void OkClick()
         {
-            if (!ControlBtnsVM.Is_connect)
+            if (!ControlBtnsVM.IsConnected)
             {
                 return;
             }
             Sending = true;
-            using (StringReader reader = new StringReader(setComendText))
+           
+
+            string[] lines = setComendText.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
+            for (int i = 0; i < lines.Length; i++)
             {
-                string command;
-                while ((command = reader.ReadLine()) != null)
-                {
-                    Client client = Client.Instance;
-                    command = command + "\r\n"; // check if work
-                    client.Write(command);
-                }
+                lines[i] += Environment.NewLine;
             }
+
+            Client client = Client.Instance;
+            client.SendCommands(lines.ToList());
         }
 
         private ICommand clearCommand;
