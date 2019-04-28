@@ -1,81 +1,82 @@
 ﻿using FlightSimulator.Model;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
     class AutoModeVM : BaseNotify
     {
-        private bool sending = true;
-        public bool Sending
-        {
-            get { return sending; }
-            set
-            {
-                sending = value;
-                NotifyPropertyChanged("Sending");
-            }
-        }
-
-
-        private string setComendText;
-        public string SetComendText
-        {
-            get { return setComendText; }
-            set
-            {
-                setComendText = value;
-                NotifyPropertyChanged("SetComendText");
-                if (setComendText != "")
-                {
-                    Sending = false;
-                }
-                else
-                {
-                    Sending = true;
-                }
-            }
-        }
-
+        #region Private members
+        private bool isNotWriting;
+        private string commandsString;
         private ICommand okCommand;
+        private ICommand clearCommand;
+        #endregion
+
+       public AutoModeVM()
+        {
+            isNotWriting = true;
+        }
+
+        #region Properties
+        public bool IsNotWriting
+        {
+            get { return isNotWriting; }
+            set
+            {
+                isNotWriting = value;
+                NotifyPropertyChanged("IsNotWriting");
+            }
+        }
+
+        public string CommandsString
+        {
+            get { return commandsString; }
+            set
+            {
+                commandsString = value;
+                NotifyPropertyChanged("CommandsString");
+                //if the textbox empty, then IsNotWriting = true. otherwise false.
+                IsNotWriting = commandsString.Equals(String.Empty);
+            }
+        }
+
         public ICommand OkCommand
         {
             get
             {
-                return okCommand ?? (okCommand = new CommandHandler(() => OkClick()));
+                return okCommand ?? (okCommand = new CommandHandler(() => OnOkClicked()));
             }
         }
 
-        private void OkClick()
+        public ICommand ClearCommand
+        {
+            get
+            {
+                return clearCommand ?? (clearCommand = new CommandHandler(() => OnClearClicked()));
+            }
+        }
+        #endregion
+
+        #region Private functions
+        private void OnOkClicked()
         {
             if (!ControlBtnsVM.IsConnected)
             {
                 return;
             }
-            Sending = true;
 
-            string[] lines = setComendText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            IsNotWriting = true;
+            string[] lines = CommandsString.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             Client.Instance.SendCommands(lines.ToList());
         }
 
-        private ICommand clearCommand;
-        public ICommand ClearCommand
+        private void OnClearClicked()
         {
-            get
-            {
-                return clearCommand ?? (clearCommand = new CommandHandler(() => ClearClick()));
-            }
+            IsNotWriting = true;
+            CommandsString = String.Empty;
         }
-
-        private void ClearClick()
-        {
-            SetComendText = "";
-            Sending = true;
-        }
+        #endregion
     }
 }
