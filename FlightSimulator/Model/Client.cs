@@ -28,11 +28,15 @@ namespace FlightSimulator.Model
         }
         #endregion
 
+        #region Private members
         private TcpClient client;
+        private readonly object commandLocker;
+        #endregion
 
         public Client()
         {
             client = new TcpClient();
+            commandLocker = new object();
         }
 
         public void ConnectToServer()
@@ -57,6 +61,11 @@ namespace FlightSimulator.Model
 
         public void SendCommand(string command)
         {
+            string newLine = "\r\n";
+            if (!command.EndsWith(newLine))
+            {
+                command += newLine;
+            }
             int offset = 0;
             NetworkStream clientStream = client.GetStream();
             byte[] bytesMsg = Encoding.ASCII.GetBytes(command);
@@ -67,17 +76,17 @@ namespace FlightSimulator.Model
         public void SendCommands(List<string> commands)
         {
             NetworkStream clientStream = client.GetStream();
+            int sleepFor = 2000;
 
             Thread thread = new Thread(() =>
             {
-                object commandLocker = new object();
                 foreach (string command in commands)
                 {
                     lock (commandLocker)
                     {
                         SendCommand(command);
                     }
-                    Thread.Sleep(2000);
+                    Thread.Sleep(sleepFor);
                 }
             });
             thread.Start();

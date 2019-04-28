@@ -9,59 +9,73 @@ namespace FlightSimulator.ViewModels
 {
     class ManualModeVM
     {
-        private double rudder = 0;
+        #region Private members
+
+        private double rudder;
+        private double throttle;
+        private double aileron;
+        private double elevator;
+
+        #endregion
+
+        #region Private functions
+
+        private void SendCommand(string command)
+        {
+            if (!ControlBtnsVM.IsConnected)
+            {
+                return;
+            }
+            Client.Instance.SendCommand(command);
+        }
+
+        #endregion
+
+        #region Constructor
+        public ManualModeVM()
+        {
+            rudder = 0;
+            throttle = 0;
+            aileron = 0;
+            elevator = 0;
+        }
+        #endregion
+
+        #region Properties
+
         public double Rudder
         {
             set
             {
                 rudder = value;
-                if (!ControlBtnsVM.IsConnected)
-                {
-                    return;
-                }
-                Client client = Client.Instance;
-                string command = "set controls/flight/rudder " + rudder + "\r\n";
-                client.Write(command);
+                string command = "set controls/flight/rudder " + Rudder;
+                SendCommand(command);
             }
             get
             { return rudder; }
         }
-        private double throttle = 0;
 
         public double Throttle
         {
             set
             {
                 throttle = value;
-                if (!ControlBtnsVM.IsConnected)
-                {
-                    return;
-                }
-                Client client = Client.Instance;
-                string command = "set controls/engines/current-engine/throttle " + rudder + "\r\n";
-                client.Write(command);
+                string command = "set controls/engines/current-engine/throttle " + Throttle;
+                SendCommand(command);
             }
             get
             {
                 return throttle;
-
             }
         }
-
-        private double aileron = 0;
 
         public double Aileron
         {
             set
             {
                 aileron = value;
-                if (!ControlBtnsVM.IsConnected)
-                {
-                    return;
-                }
-                Client client = Client.Instance;
-                string command = "set controls/flight/aileron " + rudder + "\r\n";
-                client.Write(command);
+                string command = "set controls/flight/aileron " + Aileron;
+                SendCommand(command);
             }
             get
             {
@@ -69,25 +83,20 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        private double elevator = 0;
-
         public double Elevator
         {
             set
             {
                 elevator = value;
-                if (!ControlBtnsVM.IsConnected)
-                {
-                    return;
-                }
-                Client client = Client.Instance;
-                string command = "set controls/flight/elevator " + rudder + "\r\n";
-                client.Write(command);
+                string command = "set controls/flight/elevator " + Elevator;
+                SendCommand(command);
             }
             get
             {
                 return elevator;
             }
         }
+
+        #endregion
     }
 }

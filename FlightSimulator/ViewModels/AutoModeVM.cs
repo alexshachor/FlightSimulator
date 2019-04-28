@@ -58,16 +58,9 @@ namespace FlightSimulator.ViewModels
                 return;
             }
             Sending = true;
-           
 
-            string[] lines = setComendText.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
-            for (int i = 0; i < lines.Length; i++)
-            {
-                lines[i] += Environment.NewLine;
-            }
-
-            Client client = Client.Instance;
-            client.SendCommands(lines.ToList());
+            string[] lines = setComendText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            Client.Instance.SendCommands(lines.ToList());
         }
 
         private ICommand clearCommand;
