@@ -10,16 +10,16 @@ namespace FlightSimulator.Model
     public class ApplicationSettingsModel : ISettingsModel
     {
         #region Singleton
-        private static ISettingsModel m_Instance = null;
+        private static ISettingsModel myInstance = null;
         public static ISettingsModel Instance
         {
             get
             {
-                if(m_Instance == null)
+                if(myInstance == null)
                 {
-                    m_Instance = new ApplicationSettingsModel();
+                    myInstance = new ApplicationSettingsModel();
                 }
-                return m_Instance;
+                return myInstance;
             }
         }
         #endregion

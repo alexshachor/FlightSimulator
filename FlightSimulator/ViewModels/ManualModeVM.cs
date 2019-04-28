@@ -15,7 +15,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 rudder = value;
-                if (!ControlBtnsVM.Is_connect)
+                if (!ControlBtnsVM.IsConnected)
                 {
                     return;
                 }
@@ -33,7 +33,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 throttle = value;
-                if (!ControlBtnsVM.Is_connect)
+                if (!ControlBtnsVM.IsConnected)
                 {
                     return;
                 }
@@ -55,7 +55,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 aileron = value;
-                if (!ControlBtnsVM.Is_connect)
+                if (!ControlBtnsVM.IsConnected)
                 {
                     return;
                 }
@@ -76,7 +76,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 elevator = value;
-                if (!ControlBtnsVM.Is_connect)
+                if (!ControlBtnsVM.IsConnected)
                 {
                     return;
                 }

@@ -1,52 +1,86 @@
-﻿using System;
+﻿using FlightSimulator.Model.Interface;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
     class Client
     {
-        private static Client m_Instance = null;
+        #region Singleton
+        private static Client myInstance = null;
         public static Client Instance
         {
             get
             {
-                if (m_Instance == null)
+                if (myInstance == null)
                 {
-                    m_Instance = new Client();
+                    myInstance = new Client();
                 }
-                return m_Instance;
+                return myInstance;
             }
         }
+        #endregion
 
-        TcpClient client;
-        private ApplicationSettingsModel app;
-        private NetworkStream stream;
-        private IPEndPoint ep;
+        private TcpClient client;
 
         public Client()
         {
-            app = new ApplicationSettingsModel();
             client = new TcpClient();
-            ep = new IPEndPoint(IPAddress.Parse(app.FlightServerIP), app.FlightCommandPort);
-            client.Connect(ep);
-            stream = client.GetStream();
         }
 
-        public void Write(string command)
+        public void ConnectToServer()
         {
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            ISettingsModel appSettings = ApplicationSettingsModel.Instance;
+            IPAddress serverIP = IPAddress.Parse(appSettings.FlightServerIP);
+            int serverPort = appSettings.FlightInfoPort;
+
+            try
             {
-                writer.Write(command);
-                writer.Flush();
+                IPEndPoint serverAddress = new IPEndPoint(serverIP, serverPort);
+                while (!client.Connected)
+                {
+                    client.Connect(serverAddress);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
+        public void SendCommand(string command)
+        {
+            int offset = 0;
+            NetworkStream clientStream = client.GetStream();
+            byte[] bytesMsg = Encoding.ASCII.GetBytes(command);
+            //send message to the server
+            clientStream.Write(bytesMsg, offset, bytesMsg.Length);
+        }
 
+        public void SendCommands(List<string> commands)
+        {
+            NetworkStream clientStream = client.GetStream();
+
+            Thread thread = new Thread(() =>
+            {
+                object commandLocker = new object();
+                foreach (string command in commands)
+                {
+                    lock (commandLocker)
+                    {
+                        SendCommand(command);
+                    }
+                    Thread.Sleep(2000);
+                }
+            });
+            thread.Start();
+        }
     }
 }
