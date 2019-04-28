@@ -14,10 +14,12 @@ namespace FlightSimulator.ViewModels
         private ICommand clearCommand;
         #endregion
 
-       public AutoModeVM()
+        #region Constructor
+        public AutoModeVM()
         {
             isNotWriting = true;
         }
+        #endregion
 
         #region Properties
         public bool IsNotWriting

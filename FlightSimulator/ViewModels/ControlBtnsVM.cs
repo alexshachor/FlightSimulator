@@ -11,26 +11,44 @@ namespace FlightSimulator.ViewModels
 {
     class ControlBtnsVM
     {
+        #region Private members
         private ICommand settingsCommand;
-        private static bool isConnected = false;
         private ICommand connectCommand;
+        private static bool isConnected;
+        #endregion
 
+        #region Constructor
+        public ControlBtnsVM()
+        {
+            isConnected = false;
+        }
+        #endregion
+
+        #region Private functions
+        private void OnConnectClicked()
+        {
+            Server server = new Server();
+            server.StartServer();
+
+            Client client = new Client();
+            IsConnected = client.ConnectToServer();
+        }
 
         private void OnSettingsClicked()
         {
             Settings s = new Settings();
             s.ShowDialog();
         }
+        #endregion
 
-
-        private void OnConnectClicked()
+        #region Properties
+        public ICommand ConnectCommand
         {
-            isConnected = true;
-            Server server = new Server();
-            Client client = new Client();
+            get
+            {
+                return connectCommand ?? (connectCommand = new CommandHandler(() => OnConnectClicked()));
+            }
         }
-
-
 
         public ICommand SettingsCommand
         {
@@ -40,16 +58,6 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-
-        public ICommand ConnectCommand
-        {
-            get
-            {
-                return connectCommand ?? (connectCommand = new CommandHandler(() => OnConnectClicked()));
-            }
-        }
-
-
         static public bool IsConnected
         {
             get { return isConnected; }
@@ -58,7 +66,7 @@ namespace FlightSimulator.ViewModels
                 isConnected = value;
             }
         }
-
+        #endregion
     }
 }
 

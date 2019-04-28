@@ -39,11 +39,12 @@ namespace FlightSimulator.Model
             commandLocker = new object();
         }
 
-        public void ConnectToServer()
+        public bool ConnectToServer()
         {
             ISettingsModel appSettings = ApplicationSettingsModel.Instance;
             IPAddress serverIP = IPAddress.Parse(appSettings.FlightServerIP);
             int serverPort = appSettings.FlightInfoPort;
+            bool isConnected = false;
 
             try
             {
@@ -52,11 +53,13 @@ namespace FlightSimulator.Model
                 {
                     client.Connect(serverAddress);
                 }
+                isConnected = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            return isConnected;
         }
 
         public void SendCommand(string command)

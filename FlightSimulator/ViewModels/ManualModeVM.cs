@@ -11,63 +11,36 @@ namespace FlightSimulator.ViewModels
     {
         #region Private members
 
-        private double rudder;
-        private double throttle;
         private double aileron;
+        private double rudder;
         private double elevator;
-
-        #endregion
-
-        #region Private functions
-
-        private void SendCommand(string command)
-        {
-            if (!ControlBtnsVM.IsConnected)
-            {
-                return;
-            }
-            Client.Instance.SendCommand(command);
-        }
+        private double throttle;
 
         #endregion
 
         #region Constructor
         public ManualModeVM()
         {
-            rudder = 0;
-            throttle = 0;
             aileron = 0;
+            rudder = 0;
             elevator = 0;
+            throttle = 0;
         }
         #endregion
 
+        #region Private functions
+
+        private void SendCommand(string command)
+        {
+            if (ControlBtnsVM.IsConnected)
+            {
+                Client.Instance.SendCommand(command);
+            }
+        }
+
+        #endregion
+
         #region Properties
-
-        public double Rudder
-        {
-            set
-            {
-                rudder = value;
-                string command = "set controls/flight/rudder " + Rudder;
-                SendCommand(command);
-            }
-            get
-            { return rudder; }
-        }
-
-        public double Throttle
-        {
-            set
-            {
-                throttle = value;
-                string command = "set controls/engines/current-engine/throttle " + Throttle;
-                SendCommand(command);
-            }
-            get
-            {
-                return throttle;
-            }
-        }
 
         public double Aileron
         {
@@ -83,6 +56,18 @@ namespace FlightSimulator.ViewModels
             }
         }
 
+        public double Rudder
+        {
+            set
+            {
+                rudder = value;
+                string command = "set controls/flight/rudder " + Rudder;
+                SendCommand(command);
+            }
+            get
+            { return rudder; }
+        }
+
         public double Elevator
         {
             set
@@ -94,6 +79,20 @@ namespace FlightSimulator.ViewModels
             get
             {
                 return elevator;
+            }
+        }
+
+        public double Throttle
+        {
+            set
+            {
+                throttle = value;
+                string command = "set controls/engines/current-engine/throttle " + Throttle;
+                SendCommand(command);
+            }
+            get
+            {
+                return throttle;
             }
         }
 
