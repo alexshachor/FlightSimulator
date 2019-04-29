@@ -5,70 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
-        Title="Settings" Height="270" Width="300">
+        Title="Settings" Height="250" Width="300">
     <Grid>
-        <Grid.Resources>
-            <Style TargetType="TextBlock">
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="FontFamily" Value="Segoe WP Black"/>
-            </Style>
-            <Style TargetType="TextBox">
-                <Setter Property="FontFamily" Value="Segoe WP Black"/>
-            </Style>
-            <Style TargetType="Button">
-                <Setter Property="Button.Background" Value="#480093" />
-                <Setter Property="Button.FontSize" Value="18" />
-                <Setter Property="Button.FontFamily" Value="Arial bold" />
-                <Setter Property="Button.Foreground" Value="White" />
-                <Setter Property="Button.Margin" Value="10" />
-                <Setter Property="Button.Padding" Value="10" />
-                <Setter Property="Button.Width" Value="200" />
-                <Setter Property="Button.BorderThickness" Value="1" />
-            </Style>
-        </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-
-        <Viewbox Grid.Row="1" Grid.Column="0" >
-            <TextBlock Padding="3" Margin="3" >Flight Server IP:</TextBlock>
-        </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="0"  >
-            <TextBlock Padding="3" Margin="3">Flight Info Port:</TextBlock>
-        </Viewbox>
-        <Viewbox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" >
-            <TextBlock Padding="3" Margin="3">Flight Command Port:</TextBlock>
-        </Viewbox>
-
-        <Viewbox  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Margin="3" >
-            <TextBox x:Name="txtServerIP" Padding="3" 
-                 Text="{Binding  FlightServerIP}" MinWidth="135"></TextBox>
-        </Viewbox>
-        <Viewbox  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"  Margin="3" >
-            <TextBox x:Name="txtInfoPort"  Padding="3" 
-                  Text="{Binding  FlightCommandPort}" MinWidth="135"></TextBox>
-        </Viewbox>
-        <Viewbox  Grid.Row="3" Grid.Column="2"  Margin="3" >
-            <TextBox x:Name="txtCommandPort" Padding="3"
-                  Text="{Binding  FlightInfoPort}" MinWidth="100"></TextBox>
-        </Viewbox>
-
-        <Viewbox Grid.Row="4" HorizontalAlignment="Center"  Grid.Column="0" >
-            <Button x:Name="OkBtn" Content="OK" Command="{Binding OkCommand}"/>
-        </Viewbox>
-        <Viewbox Grid.Row="4" HorizontalAlignment="Center"  Grid.Column="2" >
-            <Button x:Name="CancelBtn" Content="Cancel" Command="{Binding CancelCommand}"/>
-        </Viewbox>
-
+        <TextBlock HorizontalAlignment="Left" Margin="10,30,0,0" TextWrapping="Wrap" Text="Flight Server IP:" VerticalAlignment="Top" Height="25" Width="95" FontSize="13"/>
+        <TextBox HorizontalAlignment="Left" Height="30" Margin="110,25,0,0" TextWrapping="Wrap" Text="{Binding  FlightServerIP}" VerticalAlignment="Top" Width="170"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,70,0,0" TextWrapping="Wrap" Text="Flight Info Port:" VerticalAlignment="Top" Height="25" Width="95" FontSize="13"/>
+        <TextBox HorizontalAlignment="Left" Height="30" Margin="110,65,0,0" TextWrapping="Wrap" Text="{Binding  FlightCommandPort}" VerticalAlignment="Top" Width="170"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="Flight Command Port:" VerticalAlignment="Top" Height="25" Width="126" FontSize="13"/>
+        <TextBox HorizontalAlignment="Left" Height="30" Margin="145,105,0,0" TextWrapping="Wrap" Text="{Binding FlightCommandPort}" VerticalAlignment="Top" Width="135"/>
+        <Button Name="OkBtn" Content="OK" Command="{Binding OkCommand}" HorizontalAlignment="Left"  Width="100"
+          Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="40,160,0,15"/>
+        <Button x:Name="CancelBtn" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left"  Width="100" Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="150,160,0,15"/>
 
     </Grid>
 </Window>
