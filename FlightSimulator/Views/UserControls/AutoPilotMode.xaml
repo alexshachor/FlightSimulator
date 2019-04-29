@@ -5,43 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="350" d:DesignWidth="300">
+             d:DesignHeight="450" d:DesignWidth="400">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="300" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-
-        <Viewbox Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2"  HorizontalAlignment="Center">
-            <TextBox x:Name="SetBox" Padding="3" Margin="3" Width="400" Height="350" 
-                     Text="{Binding CommandsString,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True">
-                <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsNotWriting}" Value="True">
-                                <Setter Property="Background" Value="White" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsNotWriting}" Value="False">
-                                <Setter Property="Background" Value="LightPink" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
+        <TextBox x:Name="AutoCommandBox" HorizontalAlignment="Left" Height="347" Margin="0,30,0,0" TextWrapping="Wrap" Text="{Binding CommandsString,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" VerticalAlignment="Top" Width="400">
+            <TextBox.Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsNotWriting}" Value="True">
+                        <Setter Property="Background" Value="White" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsNotWriting}" Value="False">
+                        <Setter Property="Background" Value="LightPink" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            </TextBox.Style>
             </TextBox>
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">
-            <Button x:Name="ButOK" Content="OK" Command= "{Binding OkCommand}">
-            </Button>
-        </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-            <Button Name="ButClear" Content="Clear" Command= "{Binding ClearCommand}" >
-            </Button>
+        <Button Name="ButOK" Content="OK" Command= "{Binding OkCommand}" HorizontalAlignment="Left"  Width="120"
+          Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="75,380,0,10"/>
+        <Button x:Name="ButClear" Content="Clear" Command= "{Binding ClearCommand}" HorizontalAlignment="Left"  Width="120"
+            Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="205,392,0,22"/>
 
-        </Viewbox>
 
     </Grid>
 </UserControl>

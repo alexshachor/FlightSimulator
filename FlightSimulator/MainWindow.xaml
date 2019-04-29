@@ -23,7 +23,7 @@
             <TextBlock Grid.Column="1" Text="Flight Simulator" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Padding="8"/>
         </Viewbox>
         <Viewbox Grid.Row="1" Grid.Column="0" >
-            <localView:FlightRoutePanel/>
+            <localView:FlightRoutePanel Width="399"/>
         </Viewbox>
         <Viewbox Grid.Row="1" Grid.Column="1" >
             <localView:ControlPanel/>
