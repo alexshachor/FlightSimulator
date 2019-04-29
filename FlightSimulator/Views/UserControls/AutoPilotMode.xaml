@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="300">
-    <UserControl.Resources>
-        <!--<vm:BoolToColorConverter x:Key="BoolToColorConverter"/>-->
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="300" />
@@ -21,8 +18,20 @@
 
         <Viewbox Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="2"  HorizontalAlignment="Center">
             <TextBox x:Name="SetBox" Padding="3" Margin="3" Width="400" Height="350" 
-                     Text="{Binding CommandsString,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" />
-            <!--Background="{Binding IsNotWriting, Converter={StaticResource BoolToColorConverter},UpdateSourceTrigger=PropertyChanged}" />-->
+                     Text="{Binding CommandsString,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True">
+                <TextBox.Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsNotWriting}" Value="True">
+                                <Setter Property="Background" Value="White" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsNotWriting}" Value="False">
+                                <Setter Property="Background" Value="LightPink" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
         </Viewbox>
         <Viewbox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">
             <Button x:Name="ButOK" Content="OK" Command= "{Binding OkCommand}">
