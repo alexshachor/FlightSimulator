@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d">
     <Grid>
-        <Button x:Name="ConnectBtn" Content="Connect" Command="{Binding ConnectCommand}"/>
+        <Button x:Name="ConnectBtn" Content="Connect" Command="{Binding ConnectCommand}"
+               Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="15"/>
     </Grid>
 </UserControl>
