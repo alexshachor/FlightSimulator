@@ -11,15 +11,21 @@ namespace FlightSimulator.Model
 {
     class Server
     {
+        #region Private members
+        private TcpListener tcpListener;
+        #endregion
+
+        #region Public functions
         public void StartServer()
         {
+            //get server IP and port
             ISettingsModel appSettings = ApplicationSettingsModel.Instance;
             IPAddress serverIP = IPAddress.Parse(appSettings.FlightServerIP);
             int serverPort = appSettings.FlightInfoPort;
-            TcpListener tcpListener = new TcpListener(serverIP, serverPort);
 
             Thread thread = new Thread(() =>
             {
+                tcpListener = new TcpListener(serverIP, serverPort);
                 tcpListener.Start();
                 TcpClient client = tcpListener.AcceptTcpClient();
                 while (client.Connected)
@@ -27,7 +33,7 @@ namespace FlightSimulator.Model
                     BinaryReader reader = new BinaryReader(client.GetStream());
                     StringBuilder data = new StringBuilder();
                     char c;
-                    while ((c = reader.ReadChar()) != '\n') 
+                    while ((c = reader.ReadChar()) != '\n')
                     {
                         data.Append(c);
                     }
@@ -45,5 +51,8 @@ namespace FlightSimulator.Model
             });
             thread.Start();
         }
+
+        public void CloseServer() => tcpListener?.Stop();
+        #endregion
     }
 }

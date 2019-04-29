@@ -65,6 +65,11 @@ namespace FlightSimulator.Model
             return isConnected;
         }
 
+        public void CloseConnection()
+        {
+            client.Close();
+        }
+
         public void SendCommand(string command)
         {
             string newLine = "\r\n";

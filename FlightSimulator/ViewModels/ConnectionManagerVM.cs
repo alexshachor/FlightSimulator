@@ -12,22 +12,36 @@ namespace FlightSimulator.ViewModels
     {
         #region Private members
         private ICommand connectCommand;
+        private ICommand disconnectCommand;
         private ConnectionManager connectionManager;
+        private Server server;
+        private bool isAlive;
         #endregion
 
         #region Constructor
         public ConnectionManagerVM()
         {
             connectionManager = new ConnectionManager();
+            isAlive = false;
         }
         #endregion
 
         #region Private functions
         private void OnConnectClicked()
         {
-            Server server = new Server();
+            server = new Server();
             server.StartServer();
             connectionManager.ConnectToServer();
+            isAlive = ConnectionManager.IsConnected;
+        }
+        private void OnDisconnectClicked()
+        {
+            server?.CloseServer();
+            if (ConnectionManager.IsConnected)
+            {
+                connectionManager?.CloseConnection();
+            }
+            isAlive = false;
         }
         #endregion
 
@@ -38,6 +52,19 @@ namespace FlightSimulator.ViewModels
             {
                 return connectCommand ?? (connectCommand = new CommandHandler(() => OnConnectClicked()));
             }
+        }
+
+        public ICommand DisconnectCommand
+        {
+            get
+            {
+                return disconnectCommand ?? (disconnectCommand = new CommandHandler(() => OnDisconnectClicked()));
+            }
+        }
+
+        public bool IsAlive
+        {
+            get { return isAlive; }
         }
         #endregion
     }

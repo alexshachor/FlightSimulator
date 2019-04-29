@@ -10,20 +10,25 @@ namespace FlightSimulator.Model
     {
         #region Private members
         private static bool isConnected;
+        private Client client;
         #endregion
 
         #region Constructor
         public ConnectionManager()
         {
             isConnected = false;
+            client = new Client();
         }
         #endregion
 
         #region Public functions
         public void ConnectToServer()
         {
-            Client client = new Client();
             isConnected = client.ConnectToServer();
+        }
+        public void CloseConnection()
+        {
+            client.CloseConnection();
         }
         #endregion
 
