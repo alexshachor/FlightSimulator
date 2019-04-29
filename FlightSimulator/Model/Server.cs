@@ -16,18 +16,18 @@ namespace FlightSimulator.Model
         #endregion
 
         #region Public functions
-        public void StartServer()
+        public bool StartServer()
         {
             //get server IP and port
             ISettingsModel appSettings = ApplicationSettingsModel.Instance;
             IPAddress serverIP = IPAddress.Parse(appSettings.FlightServerIP);
             int serverPort = appSettings.FlightInfoPort;
+            tcpListener = new TcpListener(serverIP, serverPort);
+            tcpListener.Start();
+            TcpClient client = tcpListener.AcceptTcpClient();
 
             Thread thread = new Thread(() =>
-            {
-                tcpListener = new TcpListener(serverIP, serverPort);
-                tcpListener.Start();
-                TcpClient client = tcpListener.AcceptTcpClient();
+            {              
                 while (client.Connected)
                 {
                     BinaryReader reader = new BinaryReader(client.GetStream());
@@ -50,6 +50,7 @@ namespace FlightSimulator.Model
                 client.Close();
             });
             thread.Start();
+            return client.Connected;
         }
 
         public void CloseServer() => tcpListener?.Stop();

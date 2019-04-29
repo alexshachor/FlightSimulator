@@ -47,7 +47,6 @@ namespace FlightSimulator.Model
             ISettingsModel appSettings = ApplicationSettingsModel.Instance;
             IPAddress serverIP = IPAddress.Parse(appSettings.FlightServerIP);
             int serverPort = appSettings.FlightInfoPort;
-            bool isConnected = false;
 
             try
             {
@@ -56,13 +55,13 @@ namespace FlightSimulator.Model
                 {
                     client.Connect(serverAddress);
                 }
-                isConnected = true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return false;
             }
-            return isConnected;
+            return client.Connected;
         }
 
         public void CloseConnection()
@@ -72,6 +71,10 @@ namespace FlightSimulator.Model
 
         public void SendCommand(string command)
         {
+            if (!client.Connected)
+            {
+                return;
+            }
             string newLine = "\r\n";
             if (!command.EndsWith(newLine))
             {

@@ -12,7 +12,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,70,0,0" TextWrapping="Wrap" Text="Flight Info Port:" VerticalAlignment="Top" Height="25" Width="95" FontSize="13"/>
         <TextBox HorizontalAlignment="Left" Height="30" Margin="110,65,0,0" TextWrapping="Wrap" Text="{Binding  FlightCommandPort}" VerticalAlignment="Top" Width="170"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="Flight Command Port:" VerticalAlignment="Top" Height="25" Width="126" FontSize="13"/>
-        <TextBox HorizontalAlignment="Left" Height="30" Margin="145,105,0,0" TextWrapping="Wrap" Text="{Binding FlightCommandPort}" VerticalAlignment="Top" Width="135"/>
+        <TextBox HorizontalAlignment="Left" Height="30" Margin="145,105,0,0" TextWrapping="Wrap" Text="{Binding FlightInfoPort}" VerticalAlignment="Top" Width="135"/>
         <Button Name="OkBtn" Content="OK" Command="{Binding OkCommand}" HorizontalAlignment="Left"  Width="100"
           Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="40,160,0,15"/>
         <Button x:Name="CancelBtn" Content="Cancel" Command="{Binding CancelCommand}" HorizontalAlignment="Left"  Width="100" Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="150,160,0,15"/>

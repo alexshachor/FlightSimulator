@@ -85,7 +85,7 @@
                             Elevator="{Binding Elevator, Mode=OneWayToSource}"></local:Joystick>
         </Viewbox>
         <Viewbox Grid.Row="2" Grid.Column="1">
-            <Slider x:Name="throttleSlider" Value="{Binding Throttle}" Minimum="0">
+            <Slider x:Name="throttleSlider" Value="{Binding Throttle}" Minimum="-1">
                 <Slider.LayoutTransform>
                     <RotateTransform Angle="+90"/>
                 </Slider.LayoutTransform>

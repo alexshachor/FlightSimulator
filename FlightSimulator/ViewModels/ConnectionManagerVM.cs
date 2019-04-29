@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
-    class ConnectionManagerVM
+    class ConnectionManagerVM : BaseNotify
     {
         #region Private members
         private ICommand connectCommand;
@@ -16,6 +16,8 @@ namespace FlightSimulator.ViewModels
         private ConnectionManager connectionManager;
         private Server server;
         private bool isAlive;
+        private bool isServerAlive;
+
         #endregion
 
         #region Constructor
@@ -23,25 +25,36 @@ namespace FlightSimulator.ViewModels
         {
             connectionManager = new ConnectionManager();
             isAlive = false;
+            isServerAlive = false;
         }
         #endregion
 
         #region Private functions
         private void OnConnectClicked()
         {
-            server = new Server();
-            server.StartServer();
-            connectionManager.ConnectToServer();
-            isAlive = ConnectionManager.IsConnected;
+            if (!isServerAlive)
+            {
+                server = new Server();
+                isServerAlive = server.StartServer();
+            }
+            if (!IsAlive)
+            {
+                connectionManager.ConnectToServer();
+                IsAlive = ConnectionManager.IsConnected;
+            }
         }
         private void OnDisconnectClicked()
         {
-            server?.CloseServer();
+            if (isServerAlive)
+            {
+                server?.CloseServer();
+                isServerAlive = false;
+            }
             if (ConnectionManager.IsConnected)
             {
                 connectionManager?.CloseConnection();
             }
-            isAlive = false;
+            IsAlive = false;
         }
         #endregion
 
@@ -65,6 +78,11 @@ namespace FlightSimulator.ViewModels
         public bool IsAlive
         {
             get { return isAlive; }
+            set
+            {
+                isAlive = value;
+                NotifyPropertyChanged("IsAlive");
+            }
         }
         #endregion
     }
