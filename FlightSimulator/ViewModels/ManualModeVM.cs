@@ -15,6 +15,7 @@ namespace FlightSimulator.ViewModels
         private double rudder;
         private double elevator;
         private double throttle;
+        private Dictionary<string, string> commandsMap;
 
         #endregion
 
@@ -25,6 +26,13 @@ namespace FlightSimulator.ViewModels
             rudder = 0;
             elevator = 0;
             throttle = 0;
+            commandsMap = new Dictionary<string, string>
+            {
+                {"aileron", "set controls/flight/aileron "},
+                {"rudder","set controls/flight/rudder " },
+                {"elevator", "set controls/flight/elevator "},
+                {"throttle", "set controls/engines/current-engine/throttle "}
+            };
         }
         #endregion
 
@@ -47,8 +55,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 aileron = value;
-                string command = "set controls/flight/aileron " + Aileron;
-                SendCommand(command);
+                SendCommand(commandsMap["aileron"] + Aileron);
             }
             get
             {
@@ -61,8 +68,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 rudder = value;
-                string command = "set controls/flight/rudder " + Rudder;
-                SendCommand(command);
+                SendCommand(commandsMap["rudder"] + Rudder);
             }
             get
             { return rudder; }
@@ -73,8 +79,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 elevator = value;
-                string command = "set controls/flight/elevator " + Elevator;
-                SendCommand(command);
+                SendCommand(commandsMap["elevator"] + Elevator);
             }
             get
             {
@@ -87,8 +92,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 throttle = value;
-                string command = "set controls/engines/current-engine/throttle " + Throttle;
-                SendCommand(command);
+                SendCommand(commandsMap["throttle"] + Throttle);
             }
             get
             {

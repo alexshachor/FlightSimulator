@@ -9,23 +9,20 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightBoardViewModel : BaseNotify
     {
-        #region Singleton
+        #region Private members
+        private double lon;
+        private double lat;
+        #endregion
 
-        private static FlightBoardViewModel myInstance = null;
-        public static FlightBoardViewModel Instance
+        #region Constructor
+        public FlightBoardViewModel()
         {
-            get
-            {
-                if (myInstance == null)
-                {
-                    myInstance = new FlightBoardViewModel();
-                }
-                return myInstance;
-            }
+            lon = 0;
+            lat = 0;
         }
         #endregion
 
-        private double lon;
+        #region Properties
         public double Lon
         {
             get { return lon; }
@@ -36,7 +33,6 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        private double lat;
         public double Lat
         {
             get { return lat; }
@@ -46,5 +42,6 @@ namespace FlightSimulator.ViewModels
                 NotifyPropertyChanged("Lat");
             }
         }
+        #endregion
     }
 }
