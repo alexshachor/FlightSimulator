@@ -64,7 +64,7 @@ namespace FlightSimulator.ViewModels
         #region Private functions
         private void OnOkClicked()
         {
-            if (!ControlBtnsVM.IsConnected)
+            if (!ConnectionManager.IsConnected)
             {
                 return;
             }

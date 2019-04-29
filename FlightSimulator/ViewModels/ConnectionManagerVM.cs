@@ -1,5 +1,4 @@
 ﻿using FlightSimulator.Model;
-using FlightSimulator.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +8,17 @@ using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
-    class ControlBtnsVM
+    class ConnectionManagerVM
     {
         #region Private members
-        private ICommand settingsCommand;
         private ICommand connectCommand;
-        private static bool isConnected;
+        private ConnectionManager connectionManager;
         #endregion
 
         #region Constructor
-        public ControlBtnsVM()
+        public ConnectionManagerVM()
         {
-            isConnected = false;
+            connectionManager = new ConnectionManager();
         }
         #endregion
 
@@ -29,15 +27,7 @@ namespace FlightSimulator.ViewModels
         {
             Server server = new Server();
             server.StartServer();
-
-            Client client = new Client();
-            IsConnected = client.ConnectToServer();
-        }
-
-        private void OnSettingsClicked()
-        {
-            Settings s = new Settings();
-            s.ShowDialog();
+            connectionManager.ConnectToServer();
         }
         #endregion
 
@@ -49,24 +39,6 @@ namespace FlightSimulator.ViewModels
                 return connectCommand ?? (connectCommand = new CommandHandler(() => OnConnectClicked()));
             }
         }
-
-        public ICommand SettingsCommand
-        {
-            get
-            {
-                return settingsCommand ?? (settingsCommand = new CommandHandler(() => OnSettingsClicked()));
-            }
-        }
-
-        static public bool IsConnected
-        {
-            get { return isConnected; }
-            set
-            {
-                isConnected = value;
-            }
-        }
         #endregion
     }
 }
-

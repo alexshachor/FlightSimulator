@@ -32,7 +32,7 @@ namespace FlightSimulator.ViewModels
 
         private void SendCommand(string command)
         {
-            if (ControlBtnsVM.IsConnected)
+            if (ConnectionManager.IsConnected)
             {
                 Client.Instance.SendCommand(command);
             }

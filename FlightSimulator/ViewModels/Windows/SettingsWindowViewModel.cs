@@ -12,13 +12,22 @@ namespace FlightSimulator.ViewModels.Windows
 {
     public class SettingsWindowViewModel : BaseNotify
     {
+        #region Private members
         private ISettingsModel model;
+        private ICommand okCommand;
+        private ICommand cancelCommand;
+        private Action closeAction;
+        #endregion
 
-        public SettingsWindowViewModel(ISettingsModel model)
+        #region Constructor
+        public SettingsWindowViewModel(ISettingsModel settingsModel, Action closeActionParam)
         {
-            this.model = model;
+            model = settingsModel;
+            closeAction = closeActionParam;
         }
+        #endregion
 
+        #region Properties
         public string FlightServerIP
         {
             get { return model.FlightServerIP; }
@@ -49,48 +58,23 @@ namespace FlightSimulator.ViewModels.Windows
             }
         }
 
-     
+        public ICommand OkCommand => okCommand ?? (okCommand = new CommandHandler(() => OnOkClicked()));
 
-        public void SaveSettings()
-        {
-            model.SaveSettings();
-        }
-
-        public void ReloadSettings()
-        {
-            model.ReloadSettings();
-        }
-
-        #region Commands
-        #region ClickCommand
-        private ICommand _clickCommand;
-        public ICommand ClickCommand
-        {
-            get
-            {
-                return _clickCommand ?? (_clickCommand = new CommandHandler(() => OnClick()));
-            }
-        }
-        private void OnClick()
-        {
-            model.SaveSettings();
-        }
+        public ICommand CancelCommand => cancelCommand ?? (cancelCommand = new CommandHandler(() => OnCancelClicked()));
         #endregion
 
-        #region CancelCommand
-        private ICommand _cancelCommand;
-        public ICommand CancelCommand
+        #region Private functions
+        private void OnOkClicked()
         {
-            get
-            {
-                return _cancelCommand ?? (_cancelCommand = new CommandHandler(() => OnCancel()));
-            }
+            model.SaveSettings();
+            closeAction?.Invoke();
         }
-        private void OnCancel()
+
+        private void OnCancelClicked()
         {
             model.ReloadSettings();
+            closeAction?.Invoke();
         }
-        #endregion
         #endregion
     }
 }
