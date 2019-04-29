@@ -9,13 +9,28 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightBoardViewModel : BaseNotify
     {
+        #region Singleton
+        private static FlightBoardViewModel myInstance = null;
+        public static FlightBoardViewModel Instance
+        {
+            get
+            {
+                if (myInstance == null)
+                {
+                    myInstance = new FlightBoardViewModel();
+                }
+                return myInstance;
+            }
+        }
+        #endregion
+
         #region Private members
         private double lon;
         private double lat;
         #endregion
 
         #region Constructor
-        public FlightBoardViewModel()
+        private FlightBoardViewModel()
         {
             lon = 0;
             lat = 0;

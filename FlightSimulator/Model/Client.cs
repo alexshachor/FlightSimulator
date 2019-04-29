@@ -33,12 +33,15 @@ namespace FlightSimulator.Model
         private readonly object commandLocker;
         #endregion
 
+        #region Constructor
         public Client()
         {
             client = new TcpClient();
             commandLocker = new object();
         }
+        #endregion
 
+        #region Public functions 
         public bool ConnectToServer()
         {
             ISettingsModel appSettings = ApplicationSettingsModel.Instance;
@@ -94,5 +97,6 @@ namespace FlightSimulator.Model
             });
             thread.Start();
         }
+        #endregion
     }
 }
