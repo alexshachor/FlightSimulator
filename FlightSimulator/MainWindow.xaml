@@ -9,20 +9,6 @@
         Title="Flight Simulator" Height="500" Width="800" MinHeight="300" MinWidth="480" >
     <Grid>
 
-        <Grid.Resources>
-
-            <Style TargetType="Button">
-                <Setter Property="Button.Background" Value="#480093" />
-                <Setter Property="Button.FontSize" Value="18" />
-                <Setter Property="Button.FontFamily" Value="Arial bold" />
-                <Setter Property="Button.Foreground" Value="White" />
-                <Setter Property="Button.Margin" Value="10" />
-                <Setter Property="Button.Padding" Value="10" />
-                <Setter Property="Button.Width" Value="200" />
-                <Setter Property="Button.BorderThickness" Value="1" />
-            </Style>
-        </Grid.Resources>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="80*" />
             <RowDefinition Height="400*" />
@@ -37,10 +23,10 @@
             <TextBlock Grid.Column="1" Text="Flight Simulator" FontSize="25" HorizontalAlignment="Center" FontWeight="Bold" Foreground="Black" Padding="8"/>
         </Viewbox>
         <Viewbox Grid.Row="1" Grid.Column="0" >
-            <localView:FlightRoutePanel Height="443" Width="440" />
+            <localView:FlightRoutePanel/>
         </Viewbox>
-        <Viewbox Grid.Row="1" Grid.Column="1" Margin="22,10,10,0" >
-            <localView:ControlPanel Loaded="ControlPanel_Loaded" Height="523" Width="512" />
+        <Viewbox Grid.Row="1" Grid.Column="1" >
+            <localView:ControlPanel/>
         </Viewbox>
     </Grid>
 </Window>

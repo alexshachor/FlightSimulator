@@ -5,27 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" Width="430.469">
-    <Grid Margin="0,0,-33,0" HorizontalAlignment="Left" Width="433">
+             d:DesignHeight="450" Width="400">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*" />
-            <ColumnDefinition Width="175*" />
-            <ColumnDefinition Width="175*" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-
-        <local:ConnectionManager Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"/>
-
-        <Viewbox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"  >
-            <Button Name="SettingsBtn" Content="Settings" Command="{Binding SettingsCommand}"/>
-        </Viewbox>
-
-        <local:FlightBoard Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Loaded="FlightBoard_Loaded" Margin="0,0,9,0" Width="423" />
-
+    <Grid Margin="0,0,-33,0">
+        <local:FlightBoard  HorizontalAlignment="Center" Loaded="FlightBoard_Loaded" Margin="-9,60,33,0" Width="409" />
+        <Button Name="SettingsBtn" Content="Settings" HorizontalAlignment="Left" Margin="225,0,0,0" VerticalAlignment="Top" Width="175" Command="{Binding SettingsCommand}" Height="40"
+                Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="15"/>
+        <local:ConnectionManager HorizontalAlignment="Left" Margin="40,0,0,410" Width="175" Height="40" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>
