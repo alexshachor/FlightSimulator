@@ -63,10 +63,10 @@
         </Viewbox>
 
         <Viewbox Grid.Row="4" HorizontalAlignment="Center"  Grid.Column="0" >
-            <Button x:Name="btnOK" Content="OK" Command="{Binding ClickCommand}"/>
+            <Button x:Name="OkBtn" Content="OK" Command="{Binding OkCommand}"/>
         </Viewbox>
         <Viewbox Grid.Row="4" HorizontalAlignment="Center"  Grid.Column="2" >
-            <Button x:Name="btnCancel" Content="Cancel" Command="{Binding CancelCommand}"/>
+            <Button x:Name="CancelBtn" Content="Cancel" Command="{Binding CancelCommand}"/>
         </Viewbox>
 
 

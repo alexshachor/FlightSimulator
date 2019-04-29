@@ -24,7 +24,7 @@ namespace FlightSimulator.Views
         public FlightRoutePanel()
         {
             InitializeComponent();
-            DataContext = new ControlBtnsVM();
+            DataContext = new FlightRoutePanelVM();
         }
 
         private void FlightBoard_Loaded(object sender, RoutedEventArgs e)

@@ -15,32 +15,14 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*" />
             <ColumnDefinition Width="175*" />
-            
             <ColumnDefinition Width="175*" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <!--<Grid.Resources>
+        <local:ConnectionManager Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"/>
 
-            <Style TargetType="TextBlock">
-                <Setter Property="Button.FontSize" Value="8" />
-            </Style>
-
-        </Grid.Resources>-->
-        
-        <!--<Viewbox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center">
-            <Button x:Name="ButDisconnect" Content="Disconnect" Command="{Binding DisConnectCommand}">
-            </Button>
-        </Viewbox>-->
-        
-        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"   >
-            <Button x:Name="ButConnect" Content="Connect" Command="{Binding ConnectCommand}">
-            </Button>
-        </Viewbox>
         <Viewbox Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"  >
-            <Button Name="ButSettings" Content="Settings" Command="{Binding SettingsCommand}">
-            </Button>
-
+            <Button Name="SettingsBtn" Content="Settings" Command="{Binding SettingsCommand}"/>
         </Viewbox>
 
         <local:FlightBoard Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Loaded="FlightBoard_Loaded" Margin="0,0,9,0" Width="423" />

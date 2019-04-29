@@ -67,15 +67,20 @@
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\ClientHandler.cs" />
     <Compile Include="Model\CommandHandler.cs" />
+    <Compile Include="Model\ConnectionManager.cs" />
     <Compile Include="Model\EventArgs\VirtualJoystickEventArgs.cs" />
     <Compile Include="Model\Interface\ISettingsModel.cs" />
     <Compile Include="Model\Server.cs" />
     <Compile Include="ViewModels\AutoModeVM.cs" />
     <Compile Include="ViewModels\BaseNotify.cs" />
-    <Compile Include="ViewModels\ControlBtnsVM.cs" />
+    <Compile Include="ViewModels\ConnectionManagerVM.cs" />
     <Compile Include="ViewModels\FlightBoardViewModel.cs" />
+    <Compile Include="ViewModels\FlightRoutePanelVM.cs" />
     <Compile Include="ViewModels\ManualModeVM.cs" />
     <Compile Include="ViewModels\Windows\SettingsWindowViewModel.cs" />
+    <Compile Include="Views\UserControls\ConnectionManager.xaml.cs">
+      <DependentUpon>ConnectionManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\AutoPilotMode.xaml.cs">
       <DependentUpon>AutoPilotMode.xaml</DependentUpon>
     </Compile>
@@ -102,6 +107,10 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ConnectionManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
