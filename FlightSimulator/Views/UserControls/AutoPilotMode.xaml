@@ -5,26 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400">
+             d:DesignHeight="450" d:DesignWidth="450">
+
     <Grid>
-        <TextBox x:Name="AutoCommandBox" HorizontalAlignment="Left" Height="347" Margin="0,30,0,0" TextWrapping="Wrap" Text="{Binding CommandsString,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" VerticalAlignment="Top" Width="400">
+        
+        <TextBox x:Name="AutoCommandBox" HorizontalAlignment="Left" Height="347" Margin="0,30,0,0" TextWrapping="Wrap" Text="{Binding CommandsString,UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" VerticalAlignment="Top" Width="450">
             <TextBox.Style>
-            <Style TargetType="{x:Type TextBox}">
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsNotWriting}" Value="True">
-                        <Setter Property="Background" Value="White" />
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding IsNotWriting}" Value="False">
-                        <Setter Property="Background" Value="LightPink" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsNotWriting}" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsNotWriting}" Value="False">
+                            <Setter Property="Background" Value="LightPink" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
             </TextBox.Style>
-            </TextBox>
-        <Button Name="ButOK" Content="OK" Command= "{Binding OkCommand}" HorizontalAlignment="Left"  Width="120"
+        </TextBox>
+        <Button Name="OkBtn" Content="OK" Command= "{Binding OkCommand}" HorizontalAlignment="Left" Width="140"
           Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="75,380,0,10"/>
-        <Button x:Name="ButClear" Content="Clear" Command= "{Binding ClearCommand}" HorizontalAlignment="Left"  Width="120"
-            Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="205,392,0,22"/>
+        <Button x:Name="ClearBtn" Content="Clear" Command= "{Binding ClearCommand}" HorizontalAlignment="Left"  Width="140" Height="35" Background = "#480093" Foreground="white" FontFamily="Arial bold" FontSize="14" Margin="230,392,0,22"/>
 
 
     </Grid>

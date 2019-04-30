@@ -10,10 +10,10 @@
 
         <Viewbox >
             <TabControl>
-                <TabItem Header="Manual" FontSize ="15" Padding="5">
-                    <local:ManualMode></local:ManualMode>
+                <TabItem Header="Manual" Background="#a59be9" FontSize ="15" Padding="5">
+                    <local:ManualMode Height="450" Width="450"></local:ManualMode>
                 </TabItem>
-                <TabItem Header="Auto Pilot" FontSize ="15"  Padding="5">
+                <TabItem Header="Auto Pilot" Background="#a59be9" FontSize ="15"  Padding="5">
                     <local:AutoPilotMode></local:AutoPilotMode>
                 </TabItem>
             </TabControl>
