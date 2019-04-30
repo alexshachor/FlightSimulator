@@ -49,7 +49,13 @@ namespace FlightSimulator.Model
                 TcpClient client = tcpListener.AcceptTcpClient();
                 while (client.Connected)
                 {
-                    BinaryReader reader = new BinaryReader(client.GetStream());
+                    NetworkStream clientStream = client.GetStream();
+                    if (!clientStream.DataAvailable)
+                    {
+                        continue;
+                    }
+
+                    BinaryReader reader = new BinaryReader(clientStream);
                     StringBuilder data = new StringBuilder();
                     char c;
                     //each iteration read a char from the socket and add it to data 
