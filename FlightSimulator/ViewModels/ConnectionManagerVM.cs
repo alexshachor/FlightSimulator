@@ -35,7 +35,8 @@ namespace FlightSimulator.ViewModels
             if (!isServerAlive)
             {
                 server = new Server();
-                isServerAlive = server.StartServer();
+                server.StartServerThread();
+                isServerAlive = true;
             }
             if (!IsAlive)
             {

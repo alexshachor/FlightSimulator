@@ -17,7 +17,7 @@ namespace FlightSimulator.Model
         public ConnectionManager()
         {
             isConnected = false;
-            client = new Client();
+            client = Client.Instance;
         }
         #endregion
 

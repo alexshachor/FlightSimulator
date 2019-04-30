@@ -70,7 +70,7 @@ namespace FlightSimulator.ViewModels
             }
 
             string[] lines = CommandsString.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-            Client.Instance.SendCommands(lines.ToList());
+            Client.Instance.SendCommandsThread(lines.ToList());
             IsNotWriting = true;
         }
 

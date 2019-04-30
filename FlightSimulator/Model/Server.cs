@@ -15,19 +15,36 @@ namespace FlightSimulator.Model
         private TcpListener tcpListener;
         #endregion
 
-        #region Public functions
-        public bool StartServer()
+        public Server()
+        {
+            tcpListener = GetServerConfiguration();
+        }
+
+        #region Private functions
+        private TcpListener GetServerConfiguration()
         {
             //get server IP and port
             ISettingsModel appSettings = ApplicationSettingsModel.Instance;
             IPAddress serverIP = IPAddress.Parse(appSettings.FlightServerIP);
             int serverPort = appSettings.FlightInfoPort;
-            tcpListener = new TcpListener(serverIP, serverPort);
-            tcpListener.Start();
-            TcpClient client = tcpListener.AcceptTcpClient();
+            return new TcpListener(serverIP, serverPort);
+        }
 
-            Thread thread = new Thread(() =>
-            {              
+        #endregion
+
+        #region Public functions
+        public void StartServerThread()
+        {
+            Thread thread = new Thread(() => StartServer());
+            thread.Start();
+        }
+
+        public void StartServer()
+        {
+            tcpListener.Start();
+            while (true)
+            {
+                TcpClient client = tcpListener.AcceptTcpClient();
                 while (client.Connected)
                 {
                     BinaryReader reader = new BinaryReader(client.GetStream());
@@ -43,14 +60,12 @@ namespace FlightSimulator.Model
                     FlightBoardViewModel flightBoardVM = FlightBoardViewModel.Instance;
                     lock (lonAndLatLocker)
                     {
-                        flightBoardVM.Lon = Convert.ToDouble(separatedParam[0]);
-                        flightBoardVM.Lat = Convert.ToDouble(separatedParam[1]);
+                        flightBoardVM.Lon = Double.Parse(separatedParam[0]);
+                        flightBoardVM.Lat = Double.Parse(separatedParam[1]);
                     }
                 }
                 client.Close();
-            });
-            thread.Start();
-            return client.Connected;
+            }
         }
 
         public void CloseServer() => tcpListener?.Stop();
