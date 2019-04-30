@@ -15,7 +15,7 @@ namespace FlightSimulator.ViewModels
         private ICommand disconnectCommand;
         private ConnectionManager connectionManager;
         private Server server;
-        private bool isAlive;
+        private bool isConnected;
         private bool isServerAlive;
 
         #endregion
@@ -24,7 +24,7 @@ namespace FlightSimulator.ViewModels
         public ConnectionManagerVM()
         {
             connectionManager = new ConnectionManager();
-            isAlive = false;
+            isConnected = false;
             isServerAlive = false;
         }
         #endregion
@@ -32,30 +32,34 @@ namespace FlightSimulator.ViewModels
         #region Private functions
         private void OnConnectClicked()
         {
+            //if server is not online
             if (!isServerAlive)
             {
                 server = new Server();
                 server.StartServerThread();
                 isServerAlive = true;
             }
-            if (!IsAlive)
+            //if the program is yet to be connected to the server
+            if (!IsConnected)
             {
                 connectionManager.ConnectToServer();
-                IsAlive = ConnectionManager.IsConnected;
+                IsConnected = ConnectionManager.IsConnected;
             }
         }
         private void OnDisconnectClicked()
         {
+            //if the server is online => close it
             if (isServerAlive)
             {
                 server?.CloseServer();
                 isServerAlive = false;
             }
+            //if connected to the simulator => close connection
             if (ConnectionManager.IsConnected)
             {
                 connectionManager?.CloseConnection();
             }
-            IsAlive = false;
+            IsConnected = false;
         }
         #endregion
 
@@ -76,13 +80,13 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        public bool IsAlive
+        public bool IsConnected
         {
-            get { return isAlive; }
+            get { return isConnected; }
             set
             {
-                isAlive = value;
-                NotifyPropertyChanged("IsAlive");
+                isConnected = value;
+                NotifyPropertyChanged("IsConnected");
             }
         }
         #endregion

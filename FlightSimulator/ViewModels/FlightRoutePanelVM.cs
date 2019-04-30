@@ -18,6 +18,7 @@ namespace FlightSimulator.ViewModels
         #region Private functions
         private void OnSettingsClicked()
         {
+            //open settings window
             Settings s = new Settings();
             s.ShowDialog();
         }

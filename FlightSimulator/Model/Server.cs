@@ -41,15 +41,18 @@ namespace FlightSimulator.Model
 
         public void StartServer()
         {
+            //start listening to the socket
             tcpListener.Start();
             while (true)
             {
+                //wait for a client (the simulator) to connect
                 TcpClient client = tcpListener.AcceptTcpClient();
                 while (client.Connected)
                 {
                     BinaryReader reader = new BinaryReader(client.GetStream());
                     StringBuilder data = new StringBuilder();
                     char c;
+                    //each iteration read a char from the socket and add it to data 
                     while ((c = reader.ReadChar()) != '\n')
                     {
                         data.Append(c);
@@ -60,11 +63,13 @@ namespace FlightSimulator.Model
                     FlightBoardViewModel flightBoardVM = FlightBoardViewModel.Instance;
                     lock (lonAndLatLocker)
                     {
+                        //update lon and lat values
                         flightBoardVM.Lon = Double.Parse(separatedParam[0]);
                         flightBoardVM.Lat = Double.Parse(separatedParam[1]);
                     }
                 }
-                client.Close();
+                client?.GetStream()?.Close();            
+                client?.Close();
             }
         }
 

@@ -44,6 +44,7 @@ namespace FlightSimulator.Model
         #region Private functions
         private IPEndPoint GetSimulatorAddress()
         {
+            //get simulator server IP and port
             ISettingsModel appSettings = ApplicationSettingsModel.Instance;
             IPAddress simulatorServerIP = IPAddress.Parse(appSettings.FlightServerIP);
             int simulatorPort = appSettings.FlightCommandPort;
@@ -57,6 +58,7 @@ namespace FlightSimulator.Model
             IPEndPoint serverAddress = GetSimulatorAddress();
             try
             {
+                //loop until managed to connect the simulator
                 while (!client.Connected)
                 {
                     client.Connect(serverAddress);
@@ -81,6 +83,8 @@ namespace FlightSimulator.Model
             {
                 return;
             }
+
+            //the simulator expects the command string to end with new-line.
             string newLine = "\r\n";
             if (!command.EndsWith(newLine))
             {
@@ -89,27 +93,26 @@ namespace FlightSimulator.Model
             int offset = 0;
             NetworkStream clientStream = client.GetStream();
             byte[] bytesMsg = Encoding.ASCII.GetBytes(command);
-            //send message to the server
+            
+            //send the command to the server
             clientStream.Write(bytesMsg, offset, bytesMsg.Length);
-            Console.WriteLine(command);
         }
 
         public void SendCommands(List<string> commands, int commandsLatency = 0)
         {
-            NetworkStream clientStream = client.GetStream();
-
+            //each iteration send a command
             foreach (string command in commands)
             {
                 lock (commandLocker)
                 {
                     SendCommand(command);
                 }
+                //sleep for a given amount of time
                 Thread.Sleep(commandsLatency);
             }
         }
         public void SendCommandsThread(List<string> commands)
         {
-            NetworkStream clientStream = client.GetStream();
             int commandsLatency = 2000;
 
             Thread thread = new Thread(() => SendCommands(commands, commandsLatency));

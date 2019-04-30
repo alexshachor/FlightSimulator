@@ -11,11 +11,11 @@
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsAlive, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                        <DataTrigger Binding="{Binding IsConnected, UpdateSourceTrigger=PropertyChanged}" Value="False">
                             <Setter Property="Content" Value="Connect" />
                             <Setter Property="Command" Value="{Binding ConnectCommand}" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding IsAlive,UpdateSourceTrigger=PropertyChanged}" Value="True">
+                        <DataTrigger Binding="{Binding IsConnected,UpdateSourceTrigger=PropertyChanged}" Value="True">
                             <Setter Property="Content" Value="Disconnect" />
                             <Setter Property="Command" Value="{Binding DisconnectCommand}" />
                         </DataTrigger>

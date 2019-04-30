@@ -26,6 +26,7 @@ namespace FlightSimulator.ViewModels
             rudder = 0;
             elevator = 0;
             throttle = 0;
+            //maps the property and the matching message
             commandsMap = new Dictionary<string, string>
             {
                 {"aileron", "set controls/flight/aileron "},
@@ -40,6 +41,7 @@ namespace FlightSimulator.ViewModels
 
         private void SendCommand(string command)
         {
+            //if connected, send the command
             if (ConnectionManager.IsConnected)
             {
                 Client.Instance.SendCommand(command);

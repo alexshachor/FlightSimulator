@@ -69,7 +69,9 @@ namespace FlightSimulator.ViewModels
                 return;
             }
 
+            //split the string text into array of lines
             string[] lines = CommandsString.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            //send the commands list
             Client.Instance.SendCommandsThread(lines.ToList());
             IsNotWriting = true;
         }
